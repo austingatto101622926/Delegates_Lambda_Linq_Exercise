@@ -11,7 +11,13 @@ namespace FileParserNetStandard {
         /// <param name="data"></param>
         /// <returns></returns>
         public List<List<string>> StripWhiteSpace(List<List<string>> data) {
-
+            for (int row = 0; row < data.Count; row++)
+            {
+                for (int cell = 0; cell < data[row].Count; cell++)
+                {
+                    data[row][cell] = data[row][cell].Trim();
+                }
+            }
             return data;
         }
 
@@ -21,7 +27,13 @@ namespace FileParserNetStandard {
         /// <param name="data"></param>
         /// <returns></returns>
         public List<List<string>> AddQuotes(List<List<string>> data) {
- 
+            for (int row = 0; row < data.Count; row++)
+            {
+                for (int cell = 0; cell < data[row].Count; cell++)
+                {
+                    data[row][cell] = "\"" + data[row][cell] + "\"";
+                }
+            }
             return data;
         }
 
@@ -31,7 +43,13 @@ namespace FileParserNetStandard {
         /// <param name="data"></param>
         /// <returns></returns>
         public List<List<string>> StripQuotes(List<List<string>> data) {
-
+            for (int row = 0; row < data.Count; row++)
+            {
+                for (int cell = 0; cell < data[row].Count; cell++)
+                {
+                    data[row][cell] = data[row][cell].Trim('"','\'');
+                }
+            }
             return data;
         }
 

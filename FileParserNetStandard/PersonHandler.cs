@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using ObjectLibrary;
 
 
 namespace FileParserNetStandard {
-    
-    public class Person { }  // temp class delete this when Person is referenced from dll
     
     public class PersonHandler {
         public List<Person> People;

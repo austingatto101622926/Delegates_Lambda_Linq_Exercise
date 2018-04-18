@@ -15,12 +15,7 @@ namespace FileParserNetStandard {
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public List<string> ReadFile(string filePath) {
-            List<string> lines = new List<string>();
-
-            return lines;
-        }
-
+        public List<string> ReadFile(string filePath) => File.ReadAllLines(filePath).ToList();
         
         /// <summary>
         /// Takes a list of a list of data.  Writes to file, using delimeter to seperate data.  Always overwrites.
@@ -29,10 +24,19 @@ namespace FileParserNetStandard {
         /// <param name="delimeter"></param>
         /// <param name="rows"></param>
         public void WriteFile(string filePath, char delimeter, List<List<string>> rows) {
-
-            
+            StreamWriter file = File.CreateText(filePath);
+            for (int row = 0; row < rows.Count-1; row++)
+            {
+                string line = "";
+                for (int data = 0; data < rows[row].Count-1; data++)
+                {
+                    line += rows[row][data] + delimeter;
+                }
+                file.WriteLine(line+rows[row].Last());
+            }
+            file.Close();
         }
-        
+
         /// <summary>
         /// Takes a list of strings and seperates based on delimeter.  Returns list of list of strings seperated by delimeter.
         /// </summary>
@@ -40,7 +44,9 @@ namespace FileParserNetStandard {
         /// <param name="delimeter"></param>
         /// <returns></returns>
         public List<List<string>> ParseData(List<string> data, char delimeter) {
-            return new List<List<string>>();  //-- return result here
+            var result = new List<List<string>>();
+            data.ForEach(r => result.Add(r.Split(delimeter).ToList()));
+            return result;
         }
         
         /// <summary>
@@ -49,7 +55,9 @@ namespace FileParserNetStandard {
         /// <param name="data"></param>
         /// <returns></returns>
         public List<List<string>> ParseCsv(List<string> data) {
-            return new List<List<string>>();  //-- return result here
+            var result = new List<List<string>>();
+            data.ForEach(r => result.Add(r.Split(',').ToList()));
+            return result;
         }
     }
 }
