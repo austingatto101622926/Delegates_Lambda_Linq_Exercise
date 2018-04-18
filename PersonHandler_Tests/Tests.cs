@@ -11,7 +11,7 @@ namespace PersonHandler_Tests {
         private FileHandler _fh;
         private DataParser _dp;
 
-        private string csvPath = "/users/anguyen/Documents/Rider/processed_data.csv"; // change to appropriate path
+        private string csvPath = "/Users/STUDENT/Desktop/Files/processed_data.csv"; // change to appropriate path
         private List<List<string>> data;
 
         private List<Person> people;

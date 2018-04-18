@@ -9,6 +9,7 @@ using ObjectLibrary;
 namespace FileParserNetStandard {
     
     public class PersonHandler {
+
         public List<Person> People;
 
         /// <summary>
@@ -16,7 +17,13 @@ namespace FileParserNetStandard {
         /// </summary>
         /// <param name="people"></param>
         public PersonHandler(List<List<string>> people) {
-
+            People = new List<Person>();
+            foreach (List<string> row in people.Skip(1))
+            {
+                //IMPORTANT: test for constructor is wrong, expects 500 records but only 499 exist
+                //           is not accounting for column headings, constructor takes int values so it's impossible to pass
+                People.Add(new Person(int.Parse(row[0]), row[1], row[2], new DateTime(long.Parse(row[3]))));
+            }
         }
 
         /// <summary>
