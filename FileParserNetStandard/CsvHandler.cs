@@ -16,12 +16,12 @@ namespace Delegate_Exercise {
         /// <param name="readFile"></param>
         /// <param name="writeFile"></param>
         /// <param name="dataHandler"></param>
-        public void ProcessCsv(string readFile, string writeFile, Func<List<List<string>>, List<List<string>>> dataHandler) {
+        public void ProcessCsv(string readFile, string writeFile, Func<List<List<string>>, List<List<string>>> dataHandler)
+        {
             FileHandler _fh = new FileHandler();
 
             List<List<string>> result = _fh.ParseCsv(_fh.ReadFile(readFile));
-            dataHandler(result);
-            _fh.WriteFile(writeFile, ',', result);
+            _fh.WriteFile(writeFile, ',', dataHandler(result));
         }
 
         public void ProcessCsv(string readFile, string writeFile, Parser parser)
@@ -29,8 +29,7 @@ namespace Delegate_Exercise {
             FileHandler _fh = new FileHandler();
 
             List<List<string>> result = _fh.ParseCsv(_fh.ReadFile(readFile));
-            parser(result);
-            _fh.WriteFile(writeFile, ',', result);
+            _fh.WriteFile(writeFile, ',', parser(result));
         }
     }
 }

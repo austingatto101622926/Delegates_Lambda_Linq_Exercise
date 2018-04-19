@@ -22,7 +22,6 @@ namespace Delegate_Exercise {
             parser += Capitalise;
 
             _csv.ProcessCsv("/Users/STUDENT/Desktop/Files/data.csv", "/Users/STUDENT/Desktop/Files/processed_data_optional.csv", parser);
-
         }
 
         public static List<List<string>> StripHash(List<List<string>> data)

@@ -25,7 +25,7 @@ namespace FileParserNetStandard {
         /// <param name="rows"></param>
         public void WriteFile(string filePath, char delimeter, List<List<string>> rows) {
             StreamWriter file = File.CreateText(filePath);
-            for (int row = 0; row < rows.Count-1; row++)
+            for (int row = 0; row < rows.Count; row++)
             {
                 string line = "";
                 for (int data = 0; data < rows[row].Count-1; data++)

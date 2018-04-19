@@ -28,7 +28,7 @@ namespace PersonHandler_Tests {
         [Test]
         public void TestConstructor() {
             PersonHandler ph = new PersonHandler(data);
-            
+
             Assert.AreEqual(500, ph.People.Count);
             Assert.AreEqual("Arlinda", ph.People.ElementAt(462).FirstName);
         }

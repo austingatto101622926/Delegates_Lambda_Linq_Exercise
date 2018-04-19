@@ -20,8 +20,6 @@ namespace FileParserNetStandard {
             People = new List<Person>();
             foreach (List<string> row in people.Skip(1))
             {
-                //IMPORTANT: test for constructor is wrong, expects 500 records but only 499 exist
-                //           is not accounting for column headings, constructor takes int values so it's impossible to pass
                 People.Add(new Person(int.Parse(row[0]), row[1], row[2], new DateTime(long.Parse(row[3]))));
             }
         }
@@ -31,8 +29,10 @@ namespace FileParserNetStandard {
         /// </summary>
         /// <returns></returns>
         public List<Person> GetOldest() {
-            
-            return new List<Person>(); //-- return result here
+
+            //IMPORTANT: Test is wrong, tests for youngest not oldest
+            DateTime oldest = People.OrderBy(p => p.Dob).First().Dob; //.Last() works
+            return People.Where(p => p.Dob == oldest).ToList();
         }
 
         /// <summary>
@@ -42,11 +42,11 @@ namespace FileParserNetStandard {
         /// <returns></returns>
         public string GetString(int id) {
 
-            return "result";  //-- return result here
+            return People.Find(p => p.Id == id).ToString();//-- return result here
         }
-
+        
         public List<Person> GetOrderBySurname() {
-            return new List<Person>();  //-- return result here
+            return People.OrderBy(p => p.Surname).ToList();  //-- return result here
         }
 
         /// <summary>
@@ -55,9 +55,9 @@ namespace FileParserNetStandard {
         /// <param name="searchTerm"></param>
         /// <param name="caseSensitive"></param>
         /// <returns></returns>
-        public int GetNumSurnameBegins(string searchTerm, bool caseSensitive) {
-
-            return 0;  //-- return result here
+        public int GetNumSurnameBegins(string searchTerm, bool caseSensitive)
+        {
+            return People.Select(p => p.Surname).Where(s => s.StartsWith(searchTerm, !caseSensitive, null)).Count();
         }
         
         /// <summary>
@@ -66,6 +66,11 @@ namespace FileParserNetStandard {
         /// <returns></returns>
         public List<string> GetAmountBornOnEachDate() {
             List<string> result = new List<string>();
+
+            People
+                .OrderBy(o => o.Dob)
+                .GroupBy(p => p.Dob).ToList()
+                .ForEach(g => result.Add($"{g.Key}\t{g.Count()}"));
 
             return result;  //-- return result here
         }
