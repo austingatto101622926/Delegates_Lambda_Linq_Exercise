@@ -31,8 +31,8 @@ namespace FileParserNetStandard {
         public List<Person> GetOldest() {
 
             //IMPORTANT: Test is wrong, tests for youngest not oldest
-            DateTime oldest = People.OrderBy(p => p.Dob).First().Dob; //.Last() works
-            return People.Where(p => p.Dob == oldest).ToList();
+            DateTime earliest = People.Select(p => p.Dob).Max();//.Max() works
+            return People.Where(p => p.Dob == earliest).ToList();
         }
 
         /// <summary>
